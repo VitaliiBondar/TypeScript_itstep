@@ -12,11 +12,23 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var Dog = /** @class */ (function () {
+var LocalStorage = /** @class */ (function () {
+    function LocalStorage() {
+    }
+    // protected data:string='';
+    LocalStorage.prototype.setDataToStorage = function (data) {
+        localStorage.setItem('dog', JSON.stringify(data));
+    };
+    return LocalStorage;
+}());
+var Dog = /** @class */ (function (_super) {
+    __extends(Dog, _super);
     function Dog(name, breed, age) {
-        this.name = name;
-        this.breed = breed;
-        this.age = age;
+        var _this = _super.call(this) || this;
+        _this.name = name;
+        _this.breed = breed;
+        _this.age = age;
+        return _this;
     }
     ;
     Dog.prototype.showDog = function () {
@@ -32,7 +44,7 @@ var Dog = /** @class */ (function () {
             this.age = newAge;
     };
     return Dog;
-}());
+}(LocalStorage));
 var HunterDog = /** @class */ (function (_super) {
     __extends(HunterDog, _super);
     function HunterDog(name, breed, age, power) {
@@ -49,28 +61,13 @@ var HunterDog = /** @class */ (function (_super) {
         console.log('breed:', this.breed);
         console.log('age:', this.age);
         console.log('power:', this.power);
+        var d = document.getElementById('show');
     };
     HunterDog.testt = function () {
         console.log('test');
     };
     return HunterDog;
 }(Dog));
-// let bobik = new Dog('Valera','taksa',24);
-// bobik.showDog();
-// console.log(bobik.getAge());
-// bobik.setAge(56);
-// console.log(bobik.getAge());
-// console.log('**********************');
-// let Jessi = new HunterDog('Jessi','huski',25,99);
-// Jessi.showDog();
-// console.log('**********************');
-// Jessi.hunt();
-// console.log('**********************');
-// Jessi.showDog();
-// console.log('**********************');
-// console.log('**********************');
-// Jessi.setAge(21);
-// Jessi.getAge();
 var btn = document.getElementsByTagName('button')[0];
 btn.addEventListener('click', function () {
     var nameDog = document.getElementsByTagName('input')[0].value;
@@ -80,4 +77,6 @@ btn.addEventListener('click', function () {
     dog.showDog();
     console.log(dog);
     console.log(typeof (dog));
+    dog.setDataToStorage(dog);
+    console.log(JSON.stringify(dog));
 });

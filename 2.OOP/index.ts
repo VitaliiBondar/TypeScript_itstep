@@ -1,9 +1,18 @@
- abstract class  Dog {
+abstract class LocalStorage{
+     // protected data:string='';
+
+     public setDataToStorage(data:object):void{
+        localStorage.setItem('dog',JSON.stringify(data));
+     }
+
+}
+abstract class  Dog extends LocalStorage{
     protected name:string;
     protected breed:string;
     protected age:number;
     
     constructor(name:string,breed:string,age:number){
+        super();
         this.name = name;
         this.breed = breed;
         this.age = age;
@@ -37,29 +46,13 @@ class HunterDog extends Dog{
         console.log('breed:',this.breed);
         console.log('age:',this.age);
         console.log('power:',this.power);
+        let d=document.getElementById('show')
     }
     public static testt():void{        
         console.log('test');
     }
 }
 
-// let bobik = new Dog('Valera','taksa',24);
-// bobik.showDog();
-// console.log(bobik.getAge());
-// bobik.setAge(56);
-// console.log(bobik.getAge());
-// console.log('**********************');
-// let Jessi = new HunterDog('Jessi','huski',25,99);
-// Jessi.showDog();
-// console.log('**********************');
-// Jessi.hunt();
-// console.log('**********************');
-// Jessi.showDog();
-// console.log('**********************');
-// console.log('**********************');
-
-// Jessi.setAge(21);
-// Jessi.getAge();
 let btn = document.getElementsByTagName('button')[0];
 btn.addEventListener('click',()=> {    
     let nameDog = document.getElementsByTagName('input')[0].value;
@@ -69,6 +62,8 @@ btn.addEventListener('click',()=> {
     dog.showDog(); 
     console.log(dog);
     console.log(typeof(dog));
+    dog.setDataToStorage(dog);
+    console.log(JSON.stringify(dog));
 });
 
 
